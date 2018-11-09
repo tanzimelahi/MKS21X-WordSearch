@@ -37,5 +37,18 @@ public class WordSearch {
 		  data[row+i][column]=word.charAt(i);
 	  }return true;
   }
+  public boolean addWordDiagonal(String word,int row,int column) {
+	 int nrow=row;
+	 int ncol=column;
+	 char[] realword=word.toCharArray();
+	 for(int i=0;i<realword.length;i++) {
+		 data[nrow][ncol]=realword[i];
+		 nrow++;
+		 ncol++;
+		 if(nrow>=this.row||ncol>=this.cols) {
+			return false; 
+		 }
+	   }return true;
+	 }
 }
 
