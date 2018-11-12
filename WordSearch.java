@@ -48,7 +48,7 @@ public class WordSearch {
 		 if(nrow>=this.row||ncol>=this.cols) {
 			return false; 
 		 }
-	   }return true;
+	   }return true;// I am making a change now
 	 }
 }
 
