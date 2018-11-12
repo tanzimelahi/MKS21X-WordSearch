@@ -1,16 +1,16 @@
 
 public class WordSearch {
   private char[][]data;
-  private int row;
-  private int cols;
   public WordSearch(int row,int cols) {
 	  data=new char[row][cols];
-	  this.row=row;
-	  this.cols=cols;
+	  this.clear();
   }
   private void clear() {
-	  char[][]newdata=new char[row][cols];
-	  data=newdata;
+	 for(int i=0;i<data.length;i++) {
+		  for(int index=0;index<data[i].length;index++) {
+			  data[i][index]='_';
+		  }
+	  }
   }
   public String toString() {
 	  String result="";
