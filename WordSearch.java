@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 public class WordSearch{
   private char[][]data;
+<<<<<<< HEAD
   private int seed;
   private Random randgen;
   private ArrayList<String>wordsToAdd;// all words from a text file get added indicating they have not yet been added
@@ -109,6 +110,14 @@ public class WordSearch{
 	  
   private void clear() {// remember to turn this into private
 	  for(int i=0;i<data.length;i++) {
+=======
+  public WordSearch(int row,int cols) {
+	  data=new char[row][cols];
+	  this.clear();
+  }
+  private void clear() {
+	 for(int i=0;i<data.length;i++) {
+>>>>>>> df217bcc619b9d2bda23563c108f5be5d9f44102
 		  for(int index=0;index<data[i].length;index++) {
 			  data[i][index]='_';
 		  }
@@ -159,6 +168,7 @@ public class WordSearch{
 		  return result;
 	  }
   }
+<<<<<<< HEAD
   //turn all add methods except the real one into private and make all print statements invisible
   private boolean addWord(String word,int r,int c,int rowIncrement,int colIncrement) {
 	  // index out of bounds exceptions
@@ -218,6 +228,28 @@ public class WordSearch{
 		 if(data[row][i]!='_'&&data[row][i]!=word.charAt(i-column)) {
 			 return false;
 		 }
+=======
+  public boolean addWordVertical(String word,int row,int column) {
+	  for(int i=0;i<word.length();i++) {
+		  if(i>=this.row) {
+			  return false;
+		  }
+		  data[row+i][column]=word.charAt(i);
+	  }return true;
+  }
+  public boolean addWordDiagonal(String word,int row,int column) {
+	 int nrow=row;
+	 int ncol=column;
+	 char[] realword=word.toCharArray();
+	 for(int i=0;i<realword.length;i++) {
+		 data[nrow][ncol]=realword[i];
+		 nrow++;
+		 ncol++;
+		 if(nrow>=this.row||ncol>=this.cols) {
+			return false; 
+		 }
+	   }return true;// I am making a change now
+>>>>>>> df217bcc619b9d2bda23563c108f5be5d9f44102
 	 }
 	 //now adds the chars in word at the specified location
 	 for(int i=column;i<column+word.length();i++) {
