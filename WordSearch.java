@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
-public class WordSearch {
+public class WordSearch{
   private char[][]data;
   private int seed;
   private Random randgen;
@@ -14,24 +14,26 @@ public class WordSearch {
   private ArrayList<String>wordsAdded;// all words that were successfully added get added to wordsAdded
   private boolean answer;
   public WordSearch(int row,int cols,String filename,int seed,boolean answer)throws FileNotFoundException {
+	  this.seed=seed;
 	  this.answer=answer;
-          wordsAdded=new ArrayList<String>();
-         wordsToAdd=new ArrayList<String>();
-	  if(seed>10000 || seed<0) {
-		  throw new IllegalArgumentException("seed has to be between 0 to 10,000");
-	  }
 	  if(row<=0||cols<=0) {
-		  throw new IllegalArgumentException("row and col must be greater than 0");
+		  throw new IllegalArgumentException("row and cols must be greater than 0");
 	  }
-	  File name=new File(filename);
+	  if(seed<0 || seed>10000) {
+		  throw new IllegalArgumentException();
+		  
+	  }
 	  data=new char[row][cols];
 	  this.clear();
-	  Scanner in=new Scanner(name);
-	   this.seed=(int)(Math.random()*10000);
-	  randgen=new Random(seed);
+	  File file= new File(filename);
+	  wordsAdded=new ArrayList<String>();
+	  wordsToAdd=new ArrayList<String>();
+	  Scanner in=new Scanner(file);
+	  randgen=new Random(this.seed);
 	  while(in.hasNext()) {
-		  wordsToAdd.add(in.next());
+		  wordsToAdd.add(in.next().toLowerCase());
 	  }
+	  this.addAllWords();
 	  String contains="";
 	  for(int i=0;i<wordsAdded.size();i++) {
 		  contains+=wordsAdded.get(i);// clears all the elements in wordsAdded
@@ -57,7 +59,7 @@ public class WordSearch {
 	  this.seed=(int)(Math.random()*10000);
 	  randgen=new Random(seed);
 	  while(in.hasNext()) {
-		  wordsToAdd.add(in.next());
+		  wordsToAdd.add(in.next().toLowerCase());
 	  }
 	  this.addAllWords();
 	  String contains="";
@@ -113,6 +115,9 @@ public class WordSearch {
 	  }
   }
   public String toString() {
+          if(wordsAdded.size()==0){
+             return "grid was too small,make it bigger";
+          }
 	  String result="";
 	  String answer="";
 	  for(int i=0;i<data.length;i++) {
@@ -265,7 +270,7 @@ public class WordSearch {
     			System.out.println(beta);
     		}
     	
-    		else if(args.length>3) {
+    		else {
     			int row=Integer.parseInt(args[0]);
     			int cols=Integer.parseInt(args[1]);
     			int seed=Integer.parseInt(args[3]);
@@ -288,7 +293,3 @@ public class WordSearch {
     	}
     }
   }
-
-
-
-
